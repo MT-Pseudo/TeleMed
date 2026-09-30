@@ -24,14 +24,14 @@ A WebRTC-based video consultation platform designed for weak, unstable networks.
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Backend | Node.js 18+, Express 4 |
-| Realtime | Socket.IO 4 |
-| Peer-to-peer | WebRTC (VP9 / VP8) |
-| Database | MongoDB + Mongoose 8 |
-| Auth | JWT + bcryptjs |
-| Frontend | HTML5, CSS3, vanilla JavaScript |
+| Layer        | Technology                      |
+| ------------ | ------------------------------- |
+| Backend      | Node.js 18+, Express 4          |
+| Realtime     | Socket.IO 4                     |
+| Peer-to-peer | WebRTC (VP9 / VP8)              |
+| Database     | MongoDB + Mongoose 8            |
+| Auth         | JWT + bcryptjs                  |
+| Frontend     | HTML5, CSS3, vanilla JavaScript |
 
 ## Project Structure
 
@@ -107,55 +107,61 @@ Open http://localhost:3000.
 ## Low-Bandwidth Design
 
 ### Codec selection
+
 VP9 preferred via setCodecPreferences(). ~25% better compression than VP8 at equal quality. VP8 kept as fallback.
 
 ### Adaptive bitrate
+
 Every 3 seconds getStats() reads availableOutgoingBitrate. Video sender maxBitrate is set to 70% of that, clamped 100 kbps to 1.5 Mbps.
 
 ### Audio-only fallback
+
 If availableOutgoingBitrate < 120 kbps for 3 consecutive samples, video track replaced with null. If > 250 kbps for 3 samples, video restored.
 
 ### Network quality indicator
+
 Composite of RTT (< 150 ms good, > 300 ms bad), packet loss (< 1% good, > 3% bad), jitter (< 30 ms good, > 50 ms bad), bitrate (> 500 kbps good, < 200 kbps bad). Mapped to 5 bars.
 
 ### Reconnection
+
 pc.onconnectionstatechange triggers ICE restart after 4-second grace period.
 
 ### Media constraints
+
 640x480, 15 fps, echo cancellation, noise suppression, auto gain control.
 
 ## API Reference
 
-All /api/** except /api/auth/* require:
+All /api/\*_ except /api/auth/_ require:
 
     Authorization: Bearer <jwt>
 
-| Method | Endpoint | Role |
-|---|---|---|
-| POST | /api/auth/register | Public |
-| POST | /api/auth/login | Public |
-| GET | /api/users/me | Any |
-| GET | /api/users/doctors | Any |
-| GET | /api/users | Admin |
-| GET | /api/appointments | Any (role-filtered) |
-| POST | /api/appointments | Patient |
-| GET | /api/appointments/:id | Any (own) |
-| PATCH | /api/appointments/:id/notes | Doctor |
-| GET | /api/config | Any |
+| Method | Endpoint                    | Role                |
+| ------ | --------------------------- | ------------------- |
+| POST   | /api/auth/register          | Public              |
+| POST   | /api/auth/login             | Public              |
+| GET    | /api/users/me               | Any                 |
+| GET    | /api/users/doctors          | Any                 |
+| GET    | /api/users                  | Admin               |
+| GET    | /api/appointments           | Any (role-filtered) |
+| POST   | /api/appointments           | Patient             |
+| GET    | /api/appointments/:id       | Any (own)           |
+| PATCH  | /api/appointments/:id/notes | Doctor              |
+| GET    | /api/config                 | Any                 |
 
 ### Socket.IO events
 
-| Event | Direction |
-|---|---|
-| join-room | client -> server |
-| room-peers | server -> client |
-| peer-joined | server -> client |
-| peer-left | server -> client |
-| call-started | server -> client |
-| offer / answer | bidirectional |
-| ice-candidate | bidirectional |
-| chat-message | bidirectional |
-| note-update | bidirectional |
+| Event          | Direction        |
+| -------------- | ---------------- |
+| join-room      | client -> server |
+| room-peers     | server -> client |
+| peer-joined    | server -> client |
+| peer-left      | server -> client |
+| call-started   | server -> client |
+| offer / answer | bidirectional    |
+| ice-candidate  | bidirectional    |
+| chat-message   | bidirectional    |
+| note-update    | bidirectional    |
 
 ## Demo Flow
 
@@ -174,15 +180,15 @@ All /api/** except /api/auth/* require:
 
 ## Troubleshooting
 
-| Symptom | Fix |
-|---|---|
-| npm script error | Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned |
-| MongoDB service denied | Run PowerShell as Administrator, then net start MongoDB |
-| MongoDB service name invalid | Install: winget install --id=MongoDB.Server |
-| Requested device not found | No camera/mic (common in VMs). App falls back gracefully |
-| MongoDB connection failed | Service not running: net start MongoDB |
-| Port 3000 in use | set PORT=3001 then npm start |
-| White screen after login | Ctrl+F5 |
+| Symptom                      | Fix                                                                  |
+| ---------------------------- | -------------------------------------------------------------------- |
+| npm script error             | Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned |
+| MongoDB service denied       | Run PowerShell as Administrator, then net start MongoDB              |
+| MongoDB service name invalid | Install: winget install --id=MongoDB.Server                          |
+| Requested device not found   | No camera/mic (common in VMs). App falls back gracefully             |
+| MongoDB connection failed    | Service not running: net start MongoDB                               |
+| Port 3000 in use             | set PORT=3001 then npm start                                         |
+| White screen after login     | Ctrl+F5                                                              |
 
 ## Production Notes
 
@@ -203,6 +209,6 @@ MIT
 
 ## Author
 
-Your Name
-- GitHub: https://github.com/your-username
-- LinkedIn: https://linkedin.com/in/your-profile
+MT
+
+- GitHub: https://github.com/MT-Pseudo
