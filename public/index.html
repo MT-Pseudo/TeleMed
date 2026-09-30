@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TeleMed - Login</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page">
+<div class="auth-card">
+  <h1>TeleMed</h1>
+  <p class="sub">Low-bandwidth telemedicine consultations</p>
+
+  <div class="auth-tabs">
+    <button class="active" data-mode="login">Sign in</button>
+    <button data-mode="register">Register</button>
+  </div>
+
+  <form id="authForm">
+    <label id="nameField" hidden>Full name
+      <input type="text" name="name" autocomplete="name">
+    </label>
+    <label>Email
+      <input type="email" name="email" required autocomplete="email">
+    </label>
+    <label>Password
+      <input type="password" name="password" required minlength="6" autocomplete="current-password">
+    </label>
+    <label id="roleField" hidden>Role
+      <select name="role">
+        <option value="patient">Patient</option>
+        <option value="doctor">Doctor</option>
+        <option value="admin">Admin</option>
+      </select>
+    </label>
+    <label id="specField" hidden>Specialisation
+      <input type="text" name="specialization" placeholder="e.g. Cardiologist">
+    </label>
+    <button type="submit" class="btn btn-primary" id="submitBtn">Sign in</button>
+    <p id="error" class="empty" style="color:var(--danger)" hidden></p>
+  </form>
+</div>
+<script src="js/auth.js"></script>
+</body>
+</html>

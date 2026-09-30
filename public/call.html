@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Call - TeleMed</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="call-page">
+<div class="call-header">
+  <div class="info">
+    <strong id="callTitle">Connecting...</strong>
+    <span id="callSub" style="opacity:.7;margin-left:.5rem"></span>
+  </div>
+  <div style="display:flex;align-items:center;gap:1rem">
+    <div class="network-indicator" id="netIndicator" title="Network quality">
+      <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+    </div>
+    <span id="netLabel" style="font-size:.8rem;opacity:.8"></span>
+  </div>
+</div>
+
+<div class="call-main">
+  <div class="video-area">
+    <video id="remoteVideo" autoplay playsinline></video>
+    <div class="local-video"><video id="localVideo" autoplay playsinline muted></video></div>
+    <div class="audio-only-banner" id="audioOnlyBanner" hidden>Audio-only mode - weak network</div>
+  </div>
+
+  <aside class="side-panel">
+    <div class="side-tabs">
+      <button class="active" data-tab="chat">Chat</button>
+      <button data-tab="notes">Notes</button>
+    </div>
+    <div class="side-content">
+      <div id="tabChat" style="display:flex;flex-direction:column;height:100%">
+        <div class="chat-messages" id="chatMessages"></div>
+        <form class="chat-form" id="chatForm">
+          <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off">
+          <button class="btn btn-primary btn-sm" type="submit">Send</button>
+        </form>
+      </div>
+      <div id="tabNotes" class="notes-area" style="display:none;height:100%">
+        <textarea id="notesArea" placeholder="Session notes..."></textarea>
+        <p class="readonly-note" id="notesHint"></p>
+        <button class="btn btn-success btn-sm" id="saveNotesBtn" style="margin-top:.75rem" hidden>Save notes</button>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<div class="call-controls">
+  <button class="ctrl-btn" id="micBtn" title="Mute microphone">Mic</button>
+  <button class="ctrl-btn" id="camBtn" title="Turn off camera">Cam</button>
+  <button class="ctrl-btn danger" id="endBtn" title="End call">End</button>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/call.js"></script>
+</body>
+</html>

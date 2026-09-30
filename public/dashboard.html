@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard - TeleMed</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="topbar">
+  <div class="brand">TeleMed</div>
+  <div class="user">
+    <span id="userName"></span>
+    <span id="userBadge" class="badge"></span>
+    <button class="btn btn-ghost btn-sm" id="logoutBtn">Sign out</button>
+  </div>
+</div>
+
+<div class="dash-container">
+  <div class="dash-grid" id="quickActions"></div>
+
+  <div class="dash-section">
+    <h2>Upcoming appointments</h2>
+    <div id="upcoming"></div>
+  </div>
+
+  <div class="dash-section">
+    <h2>Previous appointments</h2>
+    <div id="previous"></div>
+  </div>
+</div>
+
+<div class="modal" id="bookModal" hidden>
+  <div class="modal-content">
+    <h3>Book an appointment</h3>
+    <form id="bookForm">
+      <label>Doctor
+        <select name="doctorId" id="doctorSelect" required></select>
+      </label>
+      <label style="margin-top:.75rem">Date &amp; time
+        <input type="datetime-local" name="date" required>
+      </label>
+      <label style="margin-top:.75rem">Reason
+        <textarea name="reason" rows="3" placeholder="Brief description of your symptoms"></textarea>
+      </label>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeBook()">Cancel</button>
+        <button type="submit" class="btn btn-primary">Book</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>
